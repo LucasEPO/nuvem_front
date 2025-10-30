@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Header() {
     return (
-        <nav className="bg-[rgb(1,43,68)] p-4 text-white fixed top-0 left-0 w-full flex items-center justify-between h-auto sm:h-16">
+        <nav className="bg-[rgb(1,43,68)] p-4 text-white top-0 left-0 w-full flex items-center justify-between h-auto sm:h-16">
             <HamburguerMenu />
             <div className="flex flex-col sm:flex-row items-center sm:items-center w-full sm:w-auto gap-2 sm:gap-4 mx-2 sm:mx-0 ">
                 <Image

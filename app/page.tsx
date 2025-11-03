@@ -2,6 +2,7 @@ import Image from "next/image";
 import heroImage from '@/public/assets/heroImage.png';
 import Highlight from "@/components/ui/Highlight";
 import CategoryBanner from "@/components/ui/CategoryBanner";
+import ProductCard from "@/components/ui/ProductCard";
 
 export default function Home() {
   return (
@@ -32,6 +33,18 @@ export default function Home() {
         <CategoryBanner />
         <CategoryBanner />
       </div>
+    </section>
+    <section className="flex flex-col text-center p-5 my-4 items-center">
+      <h2 className="mb-4 text-black font-bold">Produtos</h2>
+      <div className="flex flex-wrap justify-center w-[90%] max-md:w-full items-stretch gap-5 max-md:gap-3">
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+      </div>
+    </section>
+    <section className="flex flex-col justify-center items-center py-16 w-[90%] ">
+
     </section>
     </>
   );

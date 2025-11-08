@@ -4,6 +4,8 @@ import Highlight from "@/components/ui/Highlight";
 import CategoryBanner from "@/components/ui/CategoryBanner";
 import ProductCard from "@/components/ui/ProductCard";
 import PrintCard from "@/components/ui/PrintCard";
+import ReviewPost from "@/components/ui/ReviewPost";
+import ReviewForm from "@/components/ui/ReviewForm";
 
 export default function Home() {
   return (
@@ -57,8 +59,10 @@ export default function Home() {
       </div>
     </section>
     <section className="flex flex-col justify-center items-center py-16">
-      <div className="w-[90%]">
-        <h2 className="text-center text-4xl mb-4 font-extrabold relative text-[#1a2a4a] tracking-[1px] after:content-[''] after:block after:w-20 after:h-1 after:bg-linear-to-r after:from-blue-500 after:to-sky-400 after:my-4 after:mx-auto after:mb-8 after:rounded ">Avaliações de clientes!</h2>
+      <div className="w-[70%] flex flex-col justify-center items-center">
+        <h2 className="text-center text-4xl mb-4 font-extrabold relative text-[#1a2a4a] tracking-[1px] after:content-[''] after:block after:w-20 after:h-1 after:bg-linear-to-r after:from-blue-500 after:to-sky-400 after:my-4 after:mx-auto after:mb-8 after:rounded max-md:text-2xl">Avaliações de clientes!</h2>
+        <ReviewPost />
+        <ReviewForm />
       </div>
     </section>
     </>

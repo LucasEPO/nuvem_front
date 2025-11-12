@@ -9,7 +9,7 @@ import ReviewForm from "@/components/ui/ReviewForm";
 import { loadHomeData } from "@/controllers/home";
 
 export default async function Home() {
-  const { categories, collections, prints } = await loadHomeData();
+  const { categories, collections, prints, reviews } = await loadHomeData();
 
   return (
     <>
@@ -63,7 +63,9 @@ export default async function Home() {
     <section className="flex flex-col justify-center items-center py-16">
       <div className="w-[70%] flex flex-col justify-center items-center">
         <h2 className="text-center text-4xl mb-4 font-extrabold relative text-[#1a2a4a] tracking-[1px] after:content-[''] after:block after:w-20 after:h-1 after:bg-linear-to-r after:from-blue-500 after:to-sky-400 after:my-4 after:mx-auto after:mb-8 after:rounded max-md:text-2xl">Avaliações de clientes!</h2>
-        <ReviewPost />
+        {reviews.map((rev) => (
+            <ReviewPost key={rev.review_id} review={rev} />
+        ))}
         <ReviewForm />
       </div>
     </section>

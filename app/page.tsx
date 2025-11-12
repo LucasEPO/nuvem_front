@@ -9,7 +9,7 @@ import ReviewForm from "@/components/ui/ReviewForm";
 import { loadHomeData } from "@/controllers/home";
 
 export default async function Home() {
-  const { categories } = await loadHomeData();
+  const { categories, collections } = await loadHomeData();
 
   return (
     <>
@@ -26,11 +26,9 @@ export default async function Home() {
     <section className="flex flex-col text-center p-5 my-4 items-center">
       <h2 className="mb-4 text-black font-bold">Destaques</h2>
       <div className="w-[90%] flex justify-center items-center gap-8 flex-wrap">
-        <Highlight />
-        <Highlight />
-        <Highlight />
-        <Highlight />
-        <Highlight />
+        {collections.map((col) => (
+          <Highlight key={col.collection_id} collection={col} />
+        ))}
       </div>
     </section>
     <section className="my-2 flex flex-col text-center p-5 items-center">

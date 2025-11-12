@@ -9,7 +9,7 @@ import ReviewForm from "@/components/ui/ReviewForm";
 import { loadHomeData } from "@/controllers/home";
 
 export default async function Home() {
-  const { categories, collections, prints, reviews } = await loadHomeData();
+  const { categories, collections, prints, reviews, products } = await loadHomeData();
 
   return (
     <>
@@ -42,10 +42,9 @@ export default async function Home() {
     <section className="flex flex-col text-center p-5 my-4 items-center">
       <h2 className="mb-4 text-black font-bold">Produtos</h2>
       <div className="flex flex-wrap justify-center w-[90%] max-md:w-full items-stretch gap-5 max-md:gap-3">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products.map((prod) => (
+          <ProductCard key={prod.product_id} product={prod} />
+        ))}
       </div>
     </section>
     <section className="flex flex-col justify-center items-center py-16">

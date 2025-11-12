@@ -9,7 +9,7 @@ import ReviewForm from "@/components/ui/ReviewForm";
 import { loadHomeData } from "@/controllers/home";
 
 export default async function Home() {
-  const { categories, collections } = await loadHomeData();
+  const { categories, collections, prints } = await loadHomeData();
 
   return (
     <>
@@ -53,9 +53,9 @@ export default async function Home() {
         <h2 className="text-center uppercase text-4xl mb-4 font-extrabold relative text-[#1a2a4a] tracking-[1px] after:content-[''] after:block after:w-20 after:h-1 after:bg-linear-to-r after:from-blue-500 after:to-sky-400 after:my-4 after:mx-auto after:mb-8 after:rounded ">Escolha sua estampa!</h2>
         <p className="text-center text-[#64748b] text-lg mb-12 font-normal">Selecione nossas estampas ou envie a sua própria</p>
         <div className="flex flex-wrap justify-center gap-5 mb-12">
-          <PrintCard />
-          <PrintCard />
-          <PrintCard />
+          {prints.map((print) => (
+            <PrintCard key={print.print_id} print={print} />
+          ))}
           <PrintCard variant="upload"/>
         </div>
       </div>

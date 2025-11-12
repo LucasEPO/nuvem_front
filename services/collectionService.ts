@@ -12,7 +12,7 @@ export const collectionService = {
         });
 
     if (!response.ok) 
-      throw new Error("Erro ao buscar categorias");
+      throw new Error("Erro ao buscar coleções");
     
 
     return response.json();

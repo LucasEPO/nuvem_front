@@ -4,9 +4,10 @@ import { ChangeEvent, useRef, useState } from "react";
 import imagePlaceholder from '@/public/assets/image_placeeholder.svg';
 import Image from "next/image";
 import { FaCheck, FaUpload } from "react-icons/fa6";
+import { Print } from "@/models/Print.interface";
 
 interface printCardProps {
-    print?: any,
+    print?: Print,
     variant?: "default" | "upload"
 }
 
@@ -62,8 +63,11 @@ export default function PrintCard({print, variant="default"}: printCardProps) {
                 {!isUpload ? 
                     (
                         <Image
-                            src={imagePlaceholder}
-                            alt="Ilustração da estampa" 
+                            src={print?.image_url ?? imagePlaceholder}
+                            alt={print?.name ?? "Estampa"} 
+                            loading="lazy"
+                            placeholder="blur"
+                            blurDataURL="assets/image_placeholder.svg"
                             fill
                             className="object-cover transition-transform duration-500 ease-in-out hover:scale-105"
                         />
@@ -103,8 +107,8 @@ export default function PrintCard({print, variant="default"}: printCardProps) {
                 <FaCheck />
             </div>
             <div className="p-6 text-center">
-                <h3 className="text-[1.1rem] text-slate-800 font-semibold mb-2">{!isUpload ? 'Estampa teste' : 'Personalizada'}</h3>
-                <p className="text-[0.9rem] text-slate-500">{!isUpload ? 'TESTE-XXXX' : 'Sua criação'}</p>
+                <h3 className="text-[1.1rem] text-slate-800 font-semibold mb-2">{!isUpload ? `${print?.name ?? "Estampa"}` : 'Personalizada'}</h3>
+                <p className="text-[0.9rem] text-slate-500">{!isUpload ? print?.code : 'Sua criação'}</p>
             </div>
         </div>
     );

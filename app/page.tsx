@@ -6,8 +6,11 @@ import ProductCard from "@/components/ui/ProductCard";
 import PrintCard from "@/components/ui/PrintCard";
 import ReviewPost from "@/components/ui/ReviewPost";
 import ReviewForm from "@/components/ui/ReviewForm";
+import { loadHomeData } from "@/controllers/home";
 
-export default function Home() {
+export default async function Home() {
+  const { categories } = await loadHomeData();
+
   return (
     <>
     <section className="w-full px-5 flex justify-center mt-5">
@@ -33,8 +36,9 @@ export default function Home() {
     <section className="my-2 flex flex-col text-center p-5 items-center">
       <h2 className="text-4xl text-[hex(#f8fafc)] tracking-[3px] mb-3 uppercase font-extrabold [text-shadow:0_2px_10px_rgba(0,0,0,0.5)]">Categorias</h2>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] w-[90%] h-[200px] max-md:h-[300px] gap-8">
-        <CategoryBanner />
-        <CategoryBanner />
+        {categories.map((cat) => (
+          <CategoryBanner key={cat.category_id} category={cat} />
+        ))}
       </div>
     </section>
     <section className="flex flex-col text-center p-5 my-4 items-center">

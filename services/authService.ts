@@ -20,7 +20,8 @@ export const authService = {
         const data = await response.json();
 
         sessionStorage.setItem("access_token", data.access_token);
-        sessionStorage.setItem("empresa_id", data.user_id);
+        sessionStorage.setItem("user_id", data.user_id);
+        sessionStorage.setItem("user_email", data.user_email);
 
         return data.access_token;
 	}

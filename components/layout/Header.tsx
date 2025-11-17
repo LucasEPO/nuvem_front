@@ -1,3 +1,4 @@
+'use client'
 import { FaUser } from "react-icons/fa6";
 import HamburguerMenu from "../ui/HamburguerMenu";
 import HeaderButtons from "../ui/HeaderButtons";
@@ -5,8 +6,11 @@ import Searchbar from "../ui/Searchbar";
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "@/public/assets/logo.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+    const router = useRouter();
+
     return (
         <nav className="bg-[rgb(1,43,68)] p-4 text-white top-0 left-0 w-full flex items-center justify-between h-auto sm:h-16">
             <HamburguerMenu />
@@ -24,7 +28,7 @@ export default function Header() {
             </div>
             <div className="flex gap-2">
                 <HeaderButtons icon={FaShoppingCart} label="Carrinho"/>
-                <HeaderButtons icon={FaUser} label="Cadastrar"/>
+                <HeaderButtons icon={FaUser} label="Cadastrar" onClick={() => {router.push("/signup")}}/>
             </div>
         </nav>
     );

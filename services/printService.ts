@@ -1,4 +1,4 @@
-import { Print } from "@/models/Print.interface";
+import { Print } from "@/models/print.interface";
 
 const API_URL = process.env.API_URL; 
 

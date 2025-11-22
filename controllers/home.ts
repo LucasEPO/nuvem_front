@@ -1,6 +1,6 @@
 import { Category } from "@/models/category.interface";
 import { Collection } from "@/models/collection.interface";
-import { Print } from "@/models/Print.interface";
+import { Print } from "@/models/print.interface";
 import { Product } from "@/models/product.interface";
 import { Review } from "@/models/review.interface";
 import { categoryService } from "@/services/categoryService";

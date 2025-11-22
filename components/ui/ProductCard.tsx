@@ -4,12 +4,30 @@ import imagePlaceholder from "@/public/assets/image_placeeholder.svg"
 import ProductCardButtons from "./ProductCardButtons";
 import { FaShoppingCart } from "react-icons/fa";
 import { Product } from "@/models/product.interface";
+import { cartService } from "@/services/cartService";
+import { Cart } from "@/models/cart.interface";
+import { cartItemService } from "@/services/cartItemService";
 
 interface productCardProps {
     product: Product
 }
 
 export default function ProductCard({ product }: productCardProps) {
+    async function handleAddCart() {
+        const cart: Cart | null = await cartService.getCartFromUser();
+
+        const existingItem = cart?.cart_itens?.find(i => i.product?.product_id === product.product_id);
+
+        if (existingItem) {
+            await cartItemService.update(existingItem.cart_item_id, existingItem.quantity ? existingItem.quantity + 1 : 1);
+            return;
+        }
+
+        if(!cart) return;
+
+        await cartItemService.create({cartId: cart.cart_id, productId: product.product_id, quantity: 1});
+    }
+
     return(
         <div className="group flex flex-col w-[220px] h-full p-3 bg-white rounded-lg shadow-sm relative overflow-hidden mt-5 transition-all duration-500 hover:-translate-y-2.5 hover:shadow-lg max-md:w-40 max-md:p-[15px]">
             <Image
@@ -30,7 +48,7 @@ export default function ProductCard({ product }: productCardProps) {
             </span>
             <div className="flex flex-col gap-3 mt-auto">
                 <ProductCardButtons label="Comprar Agora" variant="primary"/>
-                <ProductCardButtons label="Add ao carrinho" variant="secondary" icon={FaShoppingCart}/>
+                <ProductCardButtons label="Add ao carrinho" variant="secondary" icon={FaShoppingCart} onClick={handleAddCart}/>
             </div>
         </div>
     );

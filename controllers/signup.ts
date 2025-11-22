@@ -9,7 +9,7 @@ export function signupController() {
     
     async function handleAuth( action: "login" | "signup", email: string, password: string, name?: string,) {
         try {
-             if(action === "signup" && name)
+            if(action === "signup" && name)
                 await userService.create({name, email, password})
      
             const token = await authService.login(email, password);

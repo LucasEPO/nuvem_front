@@ -10,7 +10,7 @@ import { loadHomeData } from "@/controllers/home";
 
 export default async function Home() {
   const { categories, collections, prints, reviews, products } = await loadHomeData();
-
+  
   return (
     <>
     <section className="w-full px-5 flex justify-center mt-5">

@@ -27,7 +27,7 @@ export default function Header() {
                 </div>
             </div>
             <div className="flex gap-2">
-                <HeaderButtons icon={FaShoppingCart} label="Carrinho"/>
+                <HeaderButtons icon={FaShoppingCart} label="Carrinho" onClick={() => {router.push("/cart")}}/>
                 <HeaderButtons icon={FaUser} label="Cadastrar" onClick={() => {router.push("/signup")}}/>
             </div>
         </nav>

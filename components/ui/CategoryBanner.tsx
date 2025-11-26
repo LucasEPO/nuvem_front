@@ -1,15 +1,22 @@
+"use client"
+
 import Image from "next/image";
 import imagePlaceholder from '@/public/assets/image_placeeholder.svg';
 import { FaArrowRight } from "react-icons/fa6";
 import { Category } from "@/models/category.interface";
+import { useRouter } from "next/navigation";
 
 interface categoryBannerProps {
     category?: Category;
 }
 
 export default function CategoryBanner({ category }: categoryBannerProps) {
+    const router = useRouter();
     return (
-        <div className="group relative rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] transition-all duration-500 hover:-translate-y-2.5 hover:shadow-[0_15px_40px_rgba(59,130,246,0.4)] hover:border-[rgba(59,130,246,0.5)]">
+        <div
+            onClick={() => {router.push(`/products?category=${category?.category_id}`)}} 
+            className="group relative rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] transition-all duration-500 hover:-translate-y-2.5 hover:shadow-[0_15px_40px_rgba(59,130,246,0.4)] hover:border-[rgba(59,130,246,0.5)] cursor-pointer"
+        >
             <div className="absolute bottom-0 left-0 right-0 flex flex-col p-8 z-10 text-white bg-[linear-gradient(to_top,rgba(15,23,42,0.9)_0%,rgba(15,23,42,0)_100%)]">
                 <h3 className="uppercase self-start text-2xl mb-3 font-bold text-[#f8fafc] [text-shadow:0_2px_10px_rgba(0,0,0,0.5)]">
                     {category?.name ?? "categoria"}

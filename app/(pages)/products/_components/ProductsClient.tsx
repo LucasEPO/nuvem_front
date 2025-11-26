@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import SideFilter from "@/components/ui/SideFilter";
 import ProductsGrid from "@/components/ui/ProductsGrid";
 import { Category } from "@/models/category.interface";
 import { Collection } from "@/models/collection.interface";
 import { Product } from "@/models/product.interface";
+import { useSearchParams } from "next/navigation";
 
 interface Props {
   categories: Category[];
@@ -14,8 +15,18 @@ interface Props {
 }
 
 export default function ProductsClientPage({ categories, collections, products }: Props) {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
+  const params = useSearchParams();
+
+  const categoryParam = params.get("category");
+  const collectionParam = params.get("collection");
+
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    categoryParam ? [categoryParam] : []
+  );
+
+  const [selectedCollections, setSelectedCollections] = useState<string[]>(
+    collectionParam ? [collectionParam] : []
+  );
 
   const filteredProducts = useMemo(() => {
     return products.filter(prod => {
@@ -39,6 +50,8 @@ export default function ProductsClientPage({ categories, collections, products }
         collections={collections}
         onCategoryChange={setSelectedCategories}
         onCollectionChange={setSelectedCollections}
+        initialSelectedCategories={selectedCategories}
+        initialSelectedCollections={selectedCollections}
       />
 
       <ProductsGrid products={filteredProducts} />

@@ -1,12 +1,17 @@
+"use client"
+
 import Image from "next/image";
 import imagePlaceholder from '@/public/assets/image_placeeholder.svg';
 import { Collection } from "@/models/collection.interface";
+import { useRouter } from "next/navigation";
 
 interface highlightProps {
     collection?: Collection
 }
 
 export default function Highlight({ collection }: highlightProps) {
+    const router = useRouter();
+
     return (
         <div className="flex flex-col items-center justify-between min-w-[130px] min-h-[200px]">
             <Image
@@ -18,6 +23,7 @@ export default function Highlight({ collection }: highlightProps) {
                 width={130}
                 height={130}
                 className="w-[130px] h-[130px] object-cover rounded-full cursor-pointer transition-transform duration-300 ease-in-out hover:scale-125"  
+                onClick={() => {router.push(`/products?collection=${collection?.collection_id}`)}}
             />
             <Image 
                 src={collection?.logo_url ?? imagePlaceholder}

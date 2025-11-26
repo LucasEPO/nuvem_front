@@ -13,6 +13,8 @@ interface Props {
     collections: Collection[];
     onCategoryChange?: (ids: string[]) => void;
     onCollectionChange?: (ids: string[]) => void;
+    initialSelectedCategories?: string[];
+    initialSelectedCollections?: string[];
 }
 
 export default function SideFilter({
@@ -20,10 +22,12 @@ export default function SideFilter({
     collections,
     onCategoryChange,
     onCollectionChange,
+    initialSelectedCategories = [],
+    initialSelectedCollections = [],
 }: Props) {
 
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<string[]>(initialSelectedCategories ?? []);
+    const [selectedCollections, setSelectedCollections] = useState<string[]>(initialSelectedCollections ?? []);
 
     useEffect(() => {
         onCategoryChange?.(selectedCategories);

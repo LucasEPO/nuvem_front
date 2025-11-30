@@ -6,7 +6,9 @@ import ProductsGrid from "@/components/ui/ProductsGrid";
 import { Category } from "@/models/category.interface";
 import { Collection } from "@/models/collection.interface";
 import { Product } from "@/models/product.interface";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import ProductModal from "@/components/ui/ProductModal";
+import { productService } from "@/services/productService";
 
 interface Props {
   categories: Category[];
@@ -15,10 +17,13 @@ interface Props {
 }
 
 export default function ProductsClientPage({ categories, collections, products }: Props) {
+  const router = useRouter();
   const params = useSearchParams();
 
   const categoryParam = params.get("category");
   const collectionParam = params.get("collection");
+
+  const [openModal, setOpenModal] = useState(false);
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
     categoryParam ? [categoryParam] : []
@@ -42,8 +47,29 @@ export default function ProductsClientPage({ categories, collections, products }
     });
   }, [products, selectedCategories, selectedCollections]);
 
+  async function handleCreateProduct(formData: any) {
+    try {
+      const res = await productService.create(formData);
+
+      setOpenModal(false);
+
+      if(res.ok)
+        router.refresh();
+    } catch (err) {
+      console.error("Erro ao criar produto:", err);
+    }
+  }
+
   return (
     <main className="flex min-h-screen">
+
+      <ProductModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        categories={categories}
+        collections={collections}
+        onSubmit={handleCreateProduct}
+      />
 
       <SideFilter
         categories={categories}
@@ -54,7 +80,10 @@ export default function ProductsClientPage({ categories, collections, products }
         initialSelectedCollections={selectedCollections}
       />
 
-      <ProductsGrid products={filteredProducts} />
+      <ProductsGrid 
+        products={filteredProducts} 
+        onAddProduct={() => setOpenModal(true)}
+      />
     </main>
   );
 }

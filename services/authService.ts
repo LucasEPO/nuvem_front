@@ -22,6 +22,7 @@ export const authService = {
         sessionStorage.setItem("access_token", data.access_token);
         sessionStorage.setItem("user_id", data.user_id);
         sessionStorage.setItem("user_email", data.user_email);
+        sessionStorage.setItem("is_adm", data.is_adm);
 
         return data.access_token;
 	}

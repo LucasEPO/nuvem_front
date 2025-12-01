@@ -4,7 +4,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import imagePlaceholder from '@/public/assets/image_placeeholder.svg';
 import Image from "next/image";
 import { FaCheck, FaUpload } from "react-icons/fa6";
-import { Print } from "@/models/Print.interface";
+import { Print } from "@/models/print.interface";
 
 interface printCardProps {
     print?: Print,

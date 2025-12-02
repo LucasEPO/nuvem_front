@@ -6,6 +6,7 @@ import { Cart } from "@/models/cart.interface";
 import Link from "next/link";
 import { CartItem } from "@/models/cart-item.interface";
 import { FaTrash } from "react-icons/fa6";
+import { cartItemService } from "@/services/cartItemService";
 
 export default function CartPage() {
     const [cart, setCart] = useState<Cart | null>(null);
@@ -26,10 +27,10 @@ export default function CartPage() {
         load();
     }, []);
 
-    if (loading) return <div className="p-6 text-center">Carregando carrinho...</div>;
+    if (loading) return <div className="p-6 text-center text-gray-800">Carregando carrinho...</div>;
     if (!cart || !cart.cart_itens?.length) return (
         <div className="p-6 text-center">
-            <h1 className="text-2xl font-bold mb-4">Seu carrinho está vazio</h1>
+            <h1 className="text-2xl font-bold mb-4 text-gray-800">Seu carrinho está vazio</h1>
             <Link 
                 href="/"
                 className="text-blue-600 underline"
@@ -40,8 +41,28 @@ export default function CartPage() {
     );
 
     const handleRemove = async (cartItemId: string) => {
-        // implementar depois no service
-        console.log("Remover item", cartItemId);
+        try {
+            const confirmed = window.confirm("Tem certeza que deseja remover este item?");
+            if (!confirmed) return;
+
+            setLoading(true);
+            await cartItemService.delete(cartItemId);
+
+            setCart(prev => {
+                if (!prev) return prev;
+
+                return {
+                    ...prev,
+                    cart_itens: prev.cart_itens.filter(item => item.cart_item_id !== cartItemId)
+                };
+            });
+
+        } catch (error) {
+            console.error(error);
+            alert("Não foi possível remover o item.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

@@ -81,12 +81,12 @@ export default function CartPage() {
                 {cart.cart_itens.map((item: CartItem) => (
                     <div 
                         key={item.cart_item_id}
-                        className="flex items-center gap-4 p-4 border rounded-xl shadow-sm"
+                        className="flex items-center gap-4 p-4 border rounded-xl shadow-sm overflow-hidden"
                     >
                         <img 
                             src={item.product?.image_url || "/placeholder.png"} 
                             alt={item.product?.name}
-                            className="w-20 h-20 rounded-lg object-cover"
+                            className="w-20 h-20 rounded-lg object-cover max-md:hidden"
                         />
 
                         <div className="flex-1">
@@ -102,7 +102,7 @@ export default function CartPage() {
                             className="p-2 gap-2 flex items-center justify-center text-red-600 border border-red-600 bg-transparent hover:bg-[#ad00002c] rounded-xl cursor-pointer"
                         >
                             <FaTrash />
-                            <span>Remover</span>
+                            <span className="max-md:hidden">Remover</span>
                         </button>
                     </div>
                 ))}

@@ -119,8 +119,6 @@ export default function Footer() {
                         Política de Devolução
                     </Link>
                 </div>
-
-                <p className="text-white/60 text-[0.8rem] italic mt-4">feito com amor pela equipe de marketing</p>
             </div>
         </div>
     );

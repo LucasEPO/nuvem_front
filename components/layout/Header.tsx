@@ -20,7 +20,8 @@ export default function Header() {
                     alt="Logo"
                     width={120}
                     height={40}
-                    className="h-14 w-auto"
+                    className="h-14 w-auto cursor-pointer"
+                    onClick={() => {router.push("/")}}
                 />       
                 <div className="grow w-full sm:w-auto">
                     <Searchbar />
